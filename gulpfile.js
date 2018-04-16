@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const babel = require('gulp-babel');
+const imagemin = require('gulp-imagemin');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
@@ -23,6 +24,12 @@ gulp.task('scripts', () => {
     .pipe(gulp.dest('./public/scripts'))
     .pipe(reload({stream: true}));
 });
+
+gulp.task('default', () =>
+    gulp.src('src/assets/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/assets'))
+);
 
 gulp.task('watch', () => {
   gulp.watch('./dev/styles/**/*.scss', ['styles']);

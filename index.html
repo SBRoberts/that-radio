@@ -2,12 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>That Radio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800" rel="stylesheet">
     <link rel="stylesheet" href="public/styles/style.css"/>
 </head>
 <body>
+    <main>
+        <input type="checkbox" name="menu" id="menu">
+        <!-- overlay overlays the iframe-->
+        <div class="overlay">
+            <div class="playPause">
+                <i class="fas fa-pause fa-7x"></i>
+            </div>
+            <div class="landing">
+                <img src="dev/assets/boombox.svg" alt="boombox icon">
+                <h3>That Radio</h3>
+                <h4>Live-streamed music</h4>
+            </div>
+        </div>
+        <!-- header acts as the menu for the app -->
+        <header>
+            <!-- search input -->
+            <form class="search">
+                <div class="row">
+                    <input type="text" class="query" name="query" placeholder="Search">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <!-- stations get listed here on form submit -->
+                <div class="stations">
+                    <p>Search for radio stations above</p>
+                </div>
+            </form>
+            <!-- The controls for the app remain visible -->
+            <div class="controls fa-2x">
+                <label for="menu" class="hamburger">
+                    <svg viewBox="0 0 22 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                        <path d="M1.732,1.732l18,0" style="fill:none;"/>
+                        <path d="M1.732,7.732l18,0" style="fill:none;"/>
+                        <path d="M1.732,13.732l18,0" style="fill:none;"/>
+                    </svg>
+                </label>
+                <div class="nextStation">
+                    <i class="fas fa-step-forward"></i>
+                </div>
+                <div class="prevStation">
+                    <i class="fas fa-step-backward"></i>
+                </div>
+                <div class="shuffle">
+                    <i class="fas fa-random"></i>
+                </div>
+                <div class="backgroundMenu">
+                    <i class="fas fa-image"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- gifs get appended here -->
+        <div class="gifMenu"></div>
+
+        <!-- #player gets replaced by iframe -->
+        <div id="player"></div>
+    </main>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- jquery ui -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- youtube iframe api -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- google js client library -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
+    <!-- font awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
     <script src="public/scripts/main.js"></script>
 </body>
 </html>
