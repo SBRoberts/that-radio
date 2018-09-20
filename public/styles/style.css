@@ -290,7 +290,8 @@ header {
               transform: scale(1.2); }
 
 .hamburger {
-  stroke: black; }
+  stroke: black;
+  max-width: 2rem; }
   .hamburger svg {
     width: inherit; }
     .hamburger svg path {
