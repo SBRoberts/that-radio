@@ -2,18 +2,7 @@
 
 var app = {};
 
-// app.searchResults = [];
-
-var apiKeys = function apiKeys() {
-    return $.ajax({
-        url: '/dev/scripts/apiKeys.js',
-        method: 'GET',
-        dataType: 'json'
-    }).then(function (res) {
-        res = res.apiKeys;
-        app.apiKeys = res;
-    });
-};
+app.searchResults = [];
 
 // DOM ELEMENTS
 // SEARCH
@@ -32,7 +21,7 @@ app.$overlay = $('.overlay');
 // HEADER/SIDE MENU
 app.$header = $('header');
 
-var currentStation = 'ShJAbFEOMvE';
+var currentStation = '';
 
 // get the entire station from just the video id
 app.currentStation = function () {
@@ -46,18 +35,21 @@ app.currentStation = function () {
 
 // Query YouTube and retrieve gifs from the same query
 app.ytQuery = function () {
-    var queryVal = '';
+    var queryVal = void 0;
 
     // on keydown, get the value of the search input and search YouTube w/ it
-    $(app.query).on('keydown', function () {
-        queryVal = app.query.val();
-        app.ytData(queryVal);
-        app.stations.empty();
+    $(app.query).on('keyup', function (e) {
+        if (e.key !== 'Enter') {
+            queryVal = app.query.val();
+            app.ytData(queryVal);
+            app.stations.empty();
+        }
     });
 
     // on search submit, load stations and gifs
     $(app.search).on('submit', function (e) {
         e.preventDefault();
+        app.stations.empty();
         app.loadStations();
         app.giphyInit(queryVal);
     });
@@ -68,7 +60,10 @@ app.ytQuery = function () {
     });
 };
 // Google Javascript client library and YouTube api initialization and defining YouTube search parameters. When called this function will query YouTube using the Google Data API through the necessary Google JS client library.
-app.ytData = function (query) {
+app.ytData = function () {
+    var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'radio';
+
+
     // YouTube API Boilerplate Start
     function createResource(properties) {
         var resource = {};
@@ -140,20 +135,23 @@ app.ytData = function (query) {
 
     function defineRequest() {
         // define api requests here, constructs url
-        buildApiRequest('GET', '/youtube/v3/search', { 'eventType': 'live',
+        buildApiRequest('GET', '/youtube/v3/search', {
+            'eventType': 'live',
             'maxResults': '25',
             'part': 'snippet',
             'q': 'music ' + query,
             'order': 'relevance',
-            'type': 'video' });
+            'type': 'video'
+        });
     }
     // YouTube API boilerplate end
 
     // Initialize Google JS client library
     function start() {
+        // console.log(typeof String(getKey('google')))
         // 2. Initialize the JavaScript client library.
         gapi.client.init({
-            'apiKey': app.apiKeys.google
+            'apiKey': "AIzaSyDa8_fp5MDsnWsGA5Op4jsHHv35mSFiTdQ"
         }).then(function () {
             // 3. Initialize and make the API request.
             gapi.client.request({
@@ -164,6 +162,7 @@ app.ytData = function (query) {
             console.log('Error: ' + reason.result.error.message);
         });
     };
+
     // 1. Load the JavaScript client library.
     gapi.load('client', start);
 };
@@ -251,9 +250,9 @@ app.ui = function () {
         if ($(this)[0].checked !== true) {
             // If the header is closed - if document width is greater than X, animate the header accordingly
             if (width > 480) {
-                app.$header.animate({ width: "5vmax" });
+                app.$header.animate({ width: "6vmax" });
             } else {
-                app.$header.animate({ width: "100%", height: "3.5rem" });
+                app.$header.animate({ width: "100%", height: "4.15rem" });
             }
 
             app.search.toggle("slide", 150);
@@ -266,12 +265,11 @@ app.ui = function () {
                 app.$header.animate({ width: "inherit", height: "100%" });
             }
             app.search.toggle("slide", 150);
-            $('.controls').css({ margin: '0' });
+            $('.controls').css({ margin: '2px' });
             $('.hamburger').toggleClass('closeMenu');
         }
     });
 };
-app.gifMenu.width($(document).width() - app.$header.width());
 
 // Initialize Giphy api, parameter is search term for gifs
 app.giphyInit = function (query) {
@@ -281,13 +279,13 @@ app.giphyInit = function (query) {
         dataType: 'json',
         data: {
             q: query,
-            api_key: app.apiKeys.giphy,
+            api_key: "Tlym1KyBQVNQeCjPaSWWPrsAaEwp04Pj",
             limit: '10'
         }
     }).then(function (res) {
         res.data.forEach(function (gif) {
             var gifUrl = gif.images.original.url;
-            $('.gifMenu').append('\n                <div class="gif">\n                    <img src="' + gifUrl + '" alt="" data-gif-url="' + gifUrl + '">\n                </div>\n                ');
+            $('.gifMenu').append('\n                <div class="gif">\n                    <img src="' + gifUrl + '" alt="" data-gif-url="' + gifUrl + '">\n                </div>\n            ');
             app.overlay();
         });
     });
@@ -330,7 +328,6 @@ app.playPause = function () {
 };
 
 app.init = function () {
-    apiKeys();
     app.ytData();
     app.ytQuery();
     app.ui();
