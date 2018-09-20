@@ -151,7 +151,7 @@ app.ytData = function () {
         // console.log(typeof String(getKey('google')))
         // 2. Initialize the JavaScript client library.
         gapi.client.init({
-            'apiKey': "AIzaSyDa8_fp5MDsnWsGA5Op4jsHHv35mSFiTdQ"
+            'apiKey': "AIzaSyABljrxKqX_RRid-9DZMq9aHGm65tuXSSk"
         }).then(function () {
             // 3. Initialize and make the API request.
             gapi.client.request({

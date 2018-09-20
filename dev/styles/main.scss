@@ -105,7 +105,6 @@ header{
     width: 6vmax;
     background-color: white;
     height: 100%;
-    overflow: scroll;
     .search{
         display: none;
     }
@@ -156,7 +155,7 @@ header{
         path{
             stroke-linecap: round;
             stroke-width:3px;
-            transition: stroke-width .5s, transform .7s;
+            transition: stroke-width .5s, transform .5s;
         }
     }
     &:hover{
@@ -188,6 +187,8 @@ iframe{
     svg{
         padding-left: 3px;
         transform: scale(1.2) translateX(2px);
+        max-width: 2rem;
+        overflow: visible;
         path{
             stroke-linecap: round;
             &:nth-child(1){
@@ -204,6 +205,9 @@ iframe{
         }
     }
     &:hover{
+        svg{
+            overflow: hidden;
+        }
         path{
             &:nth-child(2){
                 stroke-width: 3px;
@@ -226,7 +230,7 @@ iframe{
     width: inherit;
     min-width: 500px;
     background-color: transparent;
-    overflow: scroll;
+    overflow-y: scroll;
     img{
         max-width: 100%;
         height: 12rem;

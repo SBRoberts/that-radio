@@ -239,8 +239,7 @@ header {
           align-items: center;
   width: 6vmax;
   background-color: white;
-  height: 100%;
-  overflow: scroll; }
+  height: 100%; }
   header .search {
     display: none; }
 
@@ -297,10 +296,10 @@ header {
     .hamburger svg path {
       stroke-linecap: round;
       stroke-width: 3px;
-      -webkit-transition: stroke-width .5s, -webkit-transform .7s;
-      transition: stroke-width .5s, -webkit-transform .7s;
-      transition: stroke-width .5s, transform .7s;
-      transition: stroke-width .5s, transform .7s, -webkit-transform .7s; }
+      -webkit-transition: stroke-width .5s, -webkit-transform .5s;
+      transition: stroke-width .5s, -webkit-transform .5s;
+      transition: stroke-width .5s, transform .5s;
+      transition: stroke-width .5s, transform .5s, -webkit-transform .5s; }
   .hamburger:hover svg path:nth-child(1) {
     -webkit-transform: translateX(-9px);
             transform: translateX(-9px); }
@@ -320,7 +319,9 @@ iframe {
 .closeMenu svg {
   padding-left: 3px;
   -webkit-transform: scale(1.2) translateX(2px);
-          transform: scale(1.2) translateX(2px); }
+          transform: scale(1.2) translateX(2px);
+  max-width: 2rem;
+  overflow: visible; }
   .closeMenu svg path {
     stroke-linecap: round; }
     .closeMenu svg path:nth-child(1) {
@@ -335,6 +336,9 @@ iframe {
               transform: rotate(-37deg);
       -webkit-transform-origin: bottom left;
               transform-origin: bottom left; }
+
+.closeMenu:hover svg {
+  overflow: hidden; }
 
 .closeMenu:hover path:nth-child(2) {
   stroke-width: 3px; }
@@ -358,7 +362,7 @@ iframe {
   width: inherit;
   min-width: 500px;
   background-color: transparent;
-  overflow: scroll; }
+  overflow-y: scroll; }
   .gifMenu img {
     max-width: 100%;
     height: 12rem; }
